@@ -14,6 +14,11 @@
    It should have type: int * int * int -> int * int * int
 *)
 
+let fixLastTwo ((x, y, z) : int * int * int) : int * int * int =
+   let result = if y > z then (x, z, y) else (x, y, z) in
+   result;;
+
+fixLastTwo(1, 2, 3);;
 
 (*
    Write a function named "order" that takes a triple of integers and
@@ -21,6 +26,11 @@
    You may want to use the function from the previous part.
    It should have type: int * int * int -> int * int * int
 *)
+let order ((x, y, z) : int * int * int) : int * int * int =
+   let result = if y > z && z > x then (x, z, y) else if x > y && y > z then (z, y, x) else if z > y && y > x then (x, y, z) else (z, x, y) in
+   result;;
+
+order(1, 2, 3);;
 
 
 (*
@@ -29,8 +39,12 @@
    as is the distance between 4 and 10.
    It should have type: int * int -> int
 *)
+let distance ((x, y) : int * int) : int =
+   let calculation_result = x - y in 
+   let result = if calculation_result < 0 then calculation_result * -1 else calculation_result in
+   result;;
 
-
+distance(4, 10);;
 
 
 (*
@@ -42,6 +56,11 @@
    You may see "bytes" instead of "string" as a type.
 *)
 
+let greeting ((age, name) : int * string) : string = 
+   let result = "Greetings " ^ name ^ ", you are " ^ string_of_int(age) ^ " years old!" in
+   result;;   
+
+greeting(21, "Paul");;
 
 
 (*
@@ -55,6 +74,12 @@
    You may see "bytes" instead of "string" as a type.
 *)
 
+let greeting2 ((age, name) : int * string) : string =
+   let age_value = if age <= 0 then "not born yet" else if age <= 20 then "a youngster" else "young at heart!" in
+   let result = "Greetings " ^ name ^ ", you are " ^ age_value in  
+   result;;
+
+greeting2(22, "Paul");;
 
 
 (*
@@ -65,6 +90,11 @@
    It should have type: int * string -> bool
 *)
 
+let tooShort ((number, word) : int * string) : bool =
+   let result = if number > String.length(word) then true else false in
+   result;;
+   
+tooShort(2, "two");;
 
 
 (*
@@ -73,7 +103,12 @@
    It should have type string * string -> int
 *)
 
+let totalLength ((first_word, second_word) : string * string) : int =
+   let combined_string = first_word ^ second_word in
+   let result = String.length(combined_string) in
+   result;;
 
+totalLength("Hello", "World");;
 
 
 (*
@@ -84,7 +119,14 @@
    It should have type: string * string * string -> bool
 *)
 
+let orderedByLength ((first_word, second_word, third_word) : string * string * string) : bool =
+   let length_first_word = String.length(first_word) in
+   let length_second_word = String.length(second_word) in
+   let length_third_word = String.length(third_word) in
+   let result = if length_second_word < length_third_word && length_first_word < length_second_word then true else false in
+   result;;
 
+orderedByLength("one", "three", "eleven");;
 
 
 (*
@@ -95,3 +137,11 @@
    It should have type: int * int -> bool
 *)
 
+let prodInRange ((first_number, second_number) : int * int) : bool =
+   let calculation_result = first_number * second_number in
+   let smaller_check = if calculation_result < 10 then false else true in
+   let larger_check = if calculation_result > 20 then false else true in
+   let result = if smaller_check && larger_check then true else false in
+   result;;
+
+prodInRange(2, 7);;
